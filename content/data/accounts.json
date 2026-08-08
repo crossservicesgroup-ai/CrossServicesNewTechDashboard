@@ -1,0 +1,123 @@
+[
+  {
+    "service": "Anthropic API",
+    "purpose": "Powers the agent inside the Furies Scheduler (ANTHROPIC_API_KEY)",
+    "accountOwner": "TODO",
+    "loginAs": "TODO",
+    "vaultEntry": "Bitwarden > CSG Systems > Anthropic API",
+    "twoFactor": "TODO — confirm where codes go",
+    "usedBy": ["furies-scheduler"],
+    "ifThisLapses": "The Furies Scheduler's agent stops responding entirely.",
+    "ownershipStatus": "csg-owned"
+  },
+  {
+    "service": "Supabase",
+    "purpose": "Postgres database behind the Furies Scheduler (DATABASE_URL)",
+    "accountOwner": "TODO",
+    "loginAs": "TODO",
+    "vaultEntry": "Bitwarden > CSG Systems > Supabase",
+    "twoFactor": "TODO — confirm where codes go",
+    "usedBy": ["furies-scheduler"],
+    "ifThisLapses": "The Furies Scheduler loses its database and stops working entirely.",
+    "ownershipStatus": "csg-owned"
+  },
+  {
+    "service": "Google Workspace (Furies)",
+    "purpose": "The info@thefuriesonline.com account. Hosts the linen automation's Apps Script project and the Gmail inbox it reads.",
+    "accountOwner": "TODO",
+    "loginAs": "info@thefuriesonline.com",
+    "vaultEntry": "Bitwarden > CSG Systems > Google Workspace (Furies)",
+    "twoFactor": "TODO — confirm where codes go",
+    "usedBy": ["linen-automation"],
+    "ifThisLapses": "The linen automation stops reading incoming orders and stops running entirely.",
+    "ownershipStatus": "csg-owned"
+  },
+  {
+    "service": "Domain registrar",
+    "purpose": "Owns crossservicesgroup.com",
+    "accountOwner": "TODO — CSG owns the domain but nobody has the login yet",
+    "loginAs": "TODO",
+    "vaultEntry": "Bitwarden > CSG Systems > Domain registrar",
+    "twoFactor": "TODO — confirm where codes go",
+    "usedBy": ["csg-website"],
+    "ifThisLapses": "The domain could expire with no one able to renew it, and the CSG website's canonical URL already points at www.crossservicesgroup.com — until this is connected, the site's canonical points somewhere it does not live.",
+    "ownershipStatus": "csg-owned"
+  },
+  {
+    "service": "GitHub",
+    "purpose": "Hosts the source code for the CSG website and the Furies Scheduler",
+    "accountOwner": "TODO — repos live under the personal username gkmestler (https://github.com/gkmestler/CrossServicesSite.git and https://github.com/gkmestler/CrossServicesScheduleAgent1.git, verified from the git remotes on 7 Aug 2026); shared with a CSG account, which is not the same as being owned by a CSG organization",
+    "loginAs": "TODO",
+    "vaultEntry": "Bitwarden > CSG Systems > GitHub",
+    "twoFactor": "TODO — confirm where codes go",
+    "usedBy": ["csg-website", "furies-scheduler"],
+    "ifThisLapses": "If the personal gkmestler account is deleted, both repositories go with it, taking the source code for both the website and the scheduler.",
+    "ownershipStatus": "at-risk"
+  },
+  {
+    "service": "Vercel",
+    "purpose": "Hosts the CSG website and the Furies scheduler",
+    "accountOwner": "TODO — currently Gavin's personal account, must move to a CSG team",
+    "loginAs": "TODO",
+    "vaultEntry": "Bitwarden > CSG Systems > Vercel",
+    "twoFactor": "TODO — confirm where codes go",
+    "usedBy": ["csg-website", "furies-scheduler"],
+    "ifThisLapses": "Both sites go offline.",
+    "ownershipStatus": "at-risk"
+  },
+  {
+    "service": "Google Maps API",
+    "purpose": "Supplies driving distances to the scheduler (GOOGLE_MAPS_API_KEY, NEXT_PUBLIC_GOOGLE_MAPS_BROWSER_KEY)",
+    "accountOwner": "TODO — on a personal Google admin console; a new key needs issuing from a CSG Google Cloud project",
+    "loginAs": "TODO",
+    "vaultEntry": "Bitwarden > CSG Systems > Google Maps API",
+    "twoFactor": "TODO — confirm where codes go",
+    "usedBy": ["furies-scheduler"],
+    "ifThisLapses": "If the key goes away the scheduler produces bad routes with no obvious error — it fails silently rather than breaking loudly.",
+    "ownershipStatus": "at-risk"
+  },
+  {
+    "service": "Resend",
+    "purpose": "Sends the quote-form emails from the CSG website (RESEND_API_KEY, QUOTE_FROM_EMAIL) — verified from the website repository on 7 Aug 2026",
+    "accountOwner": "TODO — nobody has confirmed who owns this account",
+    "loginAs": "TODO",
+    "vaultEntry": "Bitwarden > CSG Systems > Resend",
+    "twoFactor": "TODO — confirm where codes go",
+    "usedBy": ["csg-website"],
+    "ifThisLapses": "Quote requests stop arriving and nobody gets an error.",
+    "ownershipStatus": "unknown"
+  },
+  {
+    "service": "Monday.com",
+    "purpose": "Work tracking across the divisions",
+    "accountOwner": "TODO",
+    "loginAs": "TODO",
+    "vaultEntry": "Bitwarden > CSG Systems > Monday.com",
+    "twoFactor": "TODO — confirm where codes go",
+    "usedBy": ["monday"],
+    "ifThisLapses": "Currently on a trial — if it expires or lapses, work tracking across the divisions has no home.",
+    "ownershipStatus": "unknown"
+  },
+  {
+    "service": "Bitwarden",
+    "purpose": "The credential vault itself — a free two-person organization holding a CSG Systems collection. Does not exist yet — it needs creating.",
+    "accountOwner": "TODO",
+    "loginAs": "TODO",
+    "vaultEntry": "TODO",
+    "twoFactor": "TODO — confirm where codes go",
+    "usedBy": [],
+    "ifThisLapses": "Without this vault existing, there is no central, secure place to store or hand over any of the credentials referenced by these entries.",
+    "ownershipStatus": "unknown"
+  },
+  {
+    "service": "Claude Team",
+    "purpose": "For the office to use Claude, and for whoever maintains these systems to use Claude Code. Does not exist yet — needs creating.",
+    "accountOwner": "TODO",
+    "loginAs": "TODO",
+    "vaultEntry": "TODO",
+    "twoFactor": "TODO — confirm where codes go",
+    "usedBy": [],
+    "ifThisLapses": "Without this being set up, the office has no sanctioned way to use Claude and whoever maintains these systems has no access to Claude Code.",
+    "ownershipStatus": "unknown"
+  }
+]

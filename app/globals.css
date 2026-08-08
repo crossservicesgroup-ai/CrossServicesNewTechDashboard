@@ -1,0 +1,303 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   CSG Systems Dashboard — design tokens
+
+   The brand colours and fonts below are carried over from the real Cross
+   Services Group website (CrossServicesSite/app/globals.css) so this
+   dashboard looks like it belongs to the same company. If the website's
+   brand ever changes, change it here too.
+
+   The signal colours are new. They are NOT brand colours. They mean one
+   thing only — the status of a system, an account or a cost — and they are
+   never used for decoration.
+   ========================================================================== */
+
+:root {
+  /* Brand — sampled from the CSG logo, same values as the public website. */
+  --cross-blue: #1255a2;
+  --cross-blue-hover: #0f4785;
+  --cross-navy: #0b3665;
+
+  /* Neutrals — cool paper, never pure white. */
+  --paper: #f7f6f2;
+  --surface: #ffffff;
+  --ink: #1b1d21;
+  --muted: #5c6270;
+  --line: #e4e2db;
+
+  /* A heavier rule for the top of a service tag. */
+  --rule: #1b1d21;
+
+  /* Signal — status only. Never decorative. Each has a tint for backgrounds
+     that still clears 4.5:1 against --ink. */
+  --signal-live: #2f7d4f;
+  --signal-live-tint: #e8f2eb;
+  --signal-progress: #b8791a;
+  --signal-progress-tint: #fbf1de;
+  --signal-risk: #a83232;
+  --signal-risk-tint: #f8e9e9;
+  --signal-none: #6e7478;
+  --signal-none-tint: #eeeeec;
+}
+
+@theme inline {
+  --color-cross-blue: var(--cross-blue);
+  --color-cross-blue-hover: var(--cross-blue-hover);
+  --color-cross-navy: var(--cross-navy);
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-rule: var(--rule);
+
+  --color-signal-live: var(--signal-live);
+  --color-signal-live-tint: var(--signal-live-tint);
+  --color-signal-progress: var(--signal-progress);
+  --color-signal-progress-tint: var(--signal-progress-tint);
+  --color-signal-risk: var(--signal-risk);
+  --color-signal-risk-tint: var(--signal-risk-tint);
+  --color-signal-none: var(--signal-none);
+  --color-signal-none-tint: var(--signal-none-tint);
+
+  --font-display: var(--font-newsreader);
+  --font-sans: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
+
+  /* Nothing on this site is pill-shaped. Matches the public website. */
+  --radius-card: 3px;
+  --radius-control: 2px;
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+@layer base {
+  * {
+    border-color: var(--line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+    font-size: 17px; /* never below 16px — iOS zooms form inputs under 16px */
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2 {
+    font-family: var(--font-newsreader), ui-serif, Georgia, serif;
+    font-weight: 500;
+    font-optical-sizing: auto;
+    color: var(--cross-navy);
+    text-wrap: balance;
+  }
+
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Focus — visible on every interactive element. Never removed.
+   -------------------------------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--cross-blue);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.on-navy :focus-visible {
+  outline-color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Typographic utilities
+   -------------------------------------------------------------------------- */
+
+/* The one place all-caps + letter spacing is allowed: mono eyebrows and tags. */
+.type-eyebrow {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Skip link — visible the moment it takes focus. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 8px;
+  top: 8px;
+  background: var(--cross-navy);
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: var(--radius-control);
+}
+
+/* --------------------------------------------------------------------------
+   Technical detail — show/hide
+
+   Resolution order:
+     1. a per-section override, set by that section's own button
+     2. otherwise the global preference on <html data-tech>, which comes from
+        the cookie, or from the viewport width on a first visit
+
+   Doing this in CSS rather than in React state is what keeps the correct
+   state on screen at first paint without a flash and without giving
+   hydration anything to disagree about.
+   -------------------------------------------------------------------------- */
+
+.tech-body {
+  display: none;
+}
+
+html[data-tech="show"] [data-tech-section]:not([data-open="0"]) .tech-body,
+html[data-tech="hide"] [data-tech-section][data-open="1"] .tech-body {
+  display: block;
+}
+
+/* The button says "Show" when the section is closed and "Hide" when open. */
+.tech-hide-label {
+  display: none;
+}
+
+html[data-tech="show"] [data-tech-section]:not([data-open="0"]) .tech-show-label,
+html[data-tech="hide"] [data-tech-section][data-open="1"] .tech-show-label {
+  display: none;
+}
+
+html[data-tech="show"] [data-tech-section]:not([data-open="0"]) .tech-hide-label,
+html[data-tech="hide"] [data-tech-section][data-open="1"] .tech-hide-label {
+  display: inline;
+}
+
+/* --------------------------------------------------------------------------
+   Motion — a collapsible expanding. That is the complete list.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Print — this site has to survive being a PDF in a drawer.
+
+   Rules: no dark blocks burning ink, navigation gone, link URLs printed
+   after the link text so a paper copy is still usable.
+   -------------------------------------------------------------------------- */
+
+@media print {
+  @page {
+    margin: 16mm 14mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt;
+    line-height: 1.45;
+  }
+
+  /* Anything marked no-print disappears: sidebar, drawer, search, buttons. */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Collapsed technical sections MUST print open, whatever the reader had on
+     screen. Otherwise a printed copy silently drops half the operator's
+     documentation — the exact failure this site exists to prevent. */
+  .tech-body {
+    display: block !important;
+  }
+
+  details {
+    display: block !important;
+  }
+
+  details > summary {
+    display: none !important;
+  }
+
+  details > *:not(summary) {
+    display: block !important;
+  }
+
+  /* Print the URL after every real link. Internal anchors would just add
+     noise, so they are excluded. */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-family: var(--font-plex-mono), ui-monospace, monospace;
+    font-size: 9pt;
+    color: #333333;
+    word-break: break-all;
+  }
+
+  /* Signal blocks become outlined rather than solid — a solid fill prints
+     as a grey smear on most office printers. */
+  .signal-block {
+    background: transparent !important;
+    color: #000000 !important;
+    border: 1pt solid #000000 !important;
+  }
+
+  .callout {
+    background: transparent !important;
+    border: 1pt solid #000000 !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: #000000 !important;
+    break-after: avoid;
+  }
+
+  table,
+  figure,
+  .service-tag,
+  .callout {
+    break-inside: avoid;
+  }
+
+  main {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+}

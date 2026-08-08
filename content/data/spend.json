@@ -1,0 +1,102 @@
+[
+  {
+    "service": "Vercel",
+    "monthlyCost": null,
+    "billing": "TODO",
+    "costType": "fixed",
+    "attributedTo": ["csg-website", "furies-scheduler"],
+    "renewalDate": "TODO",
+    "note": "Hosting for both sites. Which plan (and whether it is the free hobby tier, which is not licensed for commercial use) is unconfirmed.",
+    "spendCap": null
+  },
+  {
+    "service": "Anthropic API",
+    "monthlyCost": null,
+    "billing": "usage",
+    "costType": "variable",
+    "attributedTo": ["furies-scheduler"],
+    "renewalDate": "TODO",
+    "note": "Usage-based. No spend cap or billing alert confirmed — this is the kind of billing that produces a surprise invoice.",
+    "spendCap": null
+  },
+  {
+    "service": "Google Maps API",
+    "monthlyCost": null,
+    "billing": "usage",
+    "costType": "variable",
+    "attributedTo": ["furies-scheduler"],
+    "renewalDate": "TODO",
+    "note": "Usage-based, billed per API call. No spend cap or billing alert confirmed. Google Cloud does not cap spend by default.",
+    "spendCap": null
+  },
+  {
+    "service": "Supabase",
+    "monthlyCost": null,
+    "billing": "TODO",
+    "costType": "fixed",
+    "attributedTo": ["furies-scheduler"],
+    "renewalDate": "TODO",
+    "note": "Database. Plan tier unconfirmed.",
+    "spendCap": null
+  },
+  {
+    "service": "Resend",
+    "monthlyCost": null,
+    "billing": "TODO",
+    "costType": "fixed",
+    "attributedTo": ["csg-website"],
+    "renewalDate": "TODO",
+    "note": "Sends quote-form emails. Plan tier and ownership both unconfirmed.",
+    "spendCap": null
+  },
+  {
+    "service": "Monday.com",
+    "monthlyCost": null,
+    "billing": "annual",
+    "costType": "fixed",
+    "attributedTo": ["monday"],
+    "renewalDate": "TODO",
+    "note": "Currently on a trial. See the Monday page for the plan decision.",
+    "spendCap": null
+  },
+  {
+    "service": "Google Workspace (Furies)",
+    "monthlyCost": null,
+    "billing": "TODO",
+    "costType": "fixed",
+    "attributedTo": ["linen-automation"],
+    "renewalDate": "TODO",
+    "note": "The info@thefuriesonline.com account. Per-user mailbox cost, unconfirmed.",
+    "spendCap": null
+  },
+  {
+    "service": "Claude Team",
+    "monthlyCost": null,
+    "billing": "annual",
+    "costType": "fixed",
+    "attributedTo": [],
+    "renewalDate": "TODO",
+    "note": "Not purchased yet. Standard seats are $20/seat/month billed annually; Premium (required for Claude Code) is $100/seat/month annually. Seat count is undecided, so the monthly cost cannot be calculated.",
+    "spendCap": null
+  },
+  {
+    "service": "GitHub",
+    "monthlyCost": null,
+    "billing": "TODO",
+    "costType": "fixed",
+    "attributedTo": ["csg-website", "furies-scheduler"],
+    "renewalDate": "TODO",
+    "note": "May be free tier. Unconfirmed.",
+    "spendCap": null
+  },
+  {
+    "service": "Bitwarden",
+    "monthlyCost": null,
+    "billing": "TODO",
+    "costType": "fixed",
+    "attributedTo": [],
+    "renewalDate": "TODO",
+    "note": "Planned as a free two-person organization, so likely $0, but unconfirmed until it is created.",
+    "spendCap": null
+  }
+]
