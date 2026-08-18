@@ -4,14 +4,14 @@ import { getPage } from "@/lib/content";
 import { Page } from "@/components/Shell";
 import { DocView } from "@/components/DocView";
 
-const SLUG = "claude-for-teams";
+const SLUG = "claude";
 
 export function generateMetadata(): Metadata {
   const doc = getPage(SLUG);
   return { title: doc?.title ?? SLUG, description: doc?.summary };
 }
 
-export default function ClaudeForTeamsPage() {
+export default function ClaudePage() {
   const doc = getPage(SLUG);
   if (!doc) notFound();
 

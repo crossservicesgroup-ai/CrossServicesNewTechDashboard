@@ -4,7 +4,7 @@ slug: furies-scheduler
 status: live
 owner: TODO
 liveUrl: https://cross-services-schedule-agent1.vercel.app/
-repo: https://github.com/gkmestler/CrossServicesScheduleAgent1.git
+repo: https://github.com/crossservicesgroup-ai/CrossServicesScheduleAgent1
 lastReviewed: 2026-08-07
 summary: Turns the weekly cleaning changeover export into an optimised driving route so crews spend less time on the road.
 ---
@@ -15,14 +15,18 @@ The tool is live at `https://cross-services-schedule-agent1.vercel.app/`.
 
 It is password-protected: anyone who visits is sent to a login page and needs the site password to get in. The site is also configured to stay out of Google and other search engines, so it will not turn up in a search — the password is the only way in.
 
-> [!TODO] Where the site password is stored
-> Find out where the current site password is kept and who has it, so access isn't lost when the current owner leaves. Ask the departing developer directly if needed.
+**The site password is in the vault** as of 13 Aug 2026 — see the "Furies Scheduler app password" entry on [Accounts](/accounts). It is one shared password rather than individual accounts, which means access cannot be withdrawn from one person without changing it for everyone.
 
-**This system depends on four outside services to work**: Vercel (hosting), Supabase (stores the schedule data), Google Maps (calculates distances between properties), and Anthropic (powers the AI parsing of the changeover export). Two of these four — Vercel and the code's GitHub home — sit under a personal account rather than a Cross Services account. See the accounts page for details. Practically, this means the tool can stop working through no fault of anyone at CSG, if that personal account is closed, loses payment, or otherwise changes hands, and nobody at CSG would get a warning first.
+**This system depends on four outside services to work**: Vercel (hosting), Supabase (stores the schedule data), Google Maps (calculates distances between properties), and Anthropic (powers the AI parsing of the changeover export). As of 13 Aug 2026 the code itself is safe — the repository was moved to a Cross Services GitHub organisation — but **Vercel, which actually runs the thing, may still be a personal workspace**, and the Google Maps key the scheduler runs on was issued from a personal console. Both are now signed into with the Cross Services Google account, which is progress, but neither has been confirmed as actually moved. See the accounts page for details. Practically, this means the tool can stop working through no fault of anyone at CSG, if that personal account is closed, loses payment, or otherwise changes hands, and nobody at CSG would get a warning first.
 
 <!-- TECHNICAL -->
 
-**Repo**: `https://github.com/gkmestler/CrossServicesScheduleAgent1.git` (personal `gkmestler` GitHub account, same ownership note as the CSG website).
+**Repo**: `https://github.com/crossservicesgroup-ai/CrossServicesScheduleAgent1` — transferred to the CSG organisation on 13 Aug 2026 and verified against the remote. The scheduler's source code no longer depends on a personal account.
+
+Any clone made before that date still points at the old `gkmestler` address. GitHub redirects transferred repositories indefinitely so it will keep working, which is exactly why it is easy to miss — repoint it with `git remote set-url origin https://github.com/crossservicesgroup-ai/CrossServicesScheduleAgent1.git`.
+
+> [!TODO] Confirm Vercel still deploys the scheduler after the repo transfer
+> A repository transfer can break Vercel's GitHub connection, because the integration was tied to the repo under its previous owner. The failure is quiet: pushes appear to succeed while the live site stops updating. Push a trivial change to `main` and confirm it goes out, and if it does not, reconnect the project under Vercel → Settings → Git.
 
 **Stack**: Next.js 15.5.21, React 19.1.0, Tailwind v4, TypeScript, Node 22.x. Key dependencies: `@anthropic-ai/sdk`, `drizzle-orm`, `postgres`, `xlsx`, `lucide-react`, `zod`.
 

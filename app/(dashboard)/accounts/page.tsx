@@ -70,6 +70,17 @@ export default function AccountsPage() {
             Google admin account, printed once, sealed, and kept in the office
             safe.
           </p>
+          <p>
+            The envelope matters more than it looks. Most services here are
+            reached by signing in with the{" "}
+            <strong>Cross Services Google account</strong>, and Bitwarden is one
+            of them — while that Google account&apos;s own password is stored
+            inside Bitwarden. Each depends on the other, so the envelope must
+            hold the <strong>Google account&apos;s</strong> password and
+            two-factor recovery codes, not only Bitwarden&apos;s master
+            password. With just one of the two, whoever opens it is still
+            locked out.
+          </p>
         </div>
       </section>
 
@@ -123,11 +134,18 @@ export default function AccountsPage() {
 
             <dl className="border-t border-line px-4 py-3 text-[14px]">
               {[
-                ["Account owner", account.accountOwner],
-                ["Log in as", account.loginAs],
-                ["Vault entry", account.vaultEntry],
-                ["Two-factor", account.twoFactor],
-              ].map(([label, value]) => (
+                { label: "Account owner", value: account.accountOwner },
+                { label: "Log in as", value: account.loginAs },
+                {
+                  label: "Vault entry",
+                  value: account.vaultEntry,
+                  // Opens the item in Bitwarden. The reader still has to be
+                  // logged in and still has to have been granted access — this
+                  // saves a search, it does not hand anyone a password.
+                  href: account.vaultUrl,
+                },
+                { label: "Two-factor", value: account.twoFactor },
+              ].map(({ label, value, href }) => (
                 <div
                   key={label}
                   className="flex flex-wrap gap-x-3 gap-y-0.5 border-b border-line py-2 last:border-b-0"
@@ -136,7 +154,18 @@ export default function AccountsPage() {
                     {label}
                   </dt>
                   <dd className="min-w-0 flex-1 font-mono text-[13px] [overflow-wrap:anywhere]">
-                    <Field value={value} />
+                    {href ? (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-cross-blue underline underline-offset-2"
+                      >
+                        {value}
+                      </a>
+                    ) : (
+                      <Field value={value} />
+                    )}
                   </dd>
                 </div>
               ))}

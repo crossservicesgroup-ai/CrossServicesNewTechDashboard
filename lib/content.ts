@@ -40,7 +40,19 @@ export type Doc = {
   sourcePath: string;
 };
 
+/**
+ * A TODO is something nobody has confirmed yet. A WARNING is something already
+ * known to be true that someone has to act on or understand. Both belong on
+ * the punch list — a warning nobody reads is exactly as dangerous as a fact
+ * nobody confirmed.
+ */
+export type ItemKind = "todo" | "warning";
+
 export type TodoItem = {
+  /** Stable across rebuilds, so a ticked box stays ticked. Derived from the
+   *  source file and the item's title, not its position in the file. */
+  id: string;
+  kind: ItemKind;
   title: string;
   detail: string;
   docTitle: string;
@@ -106,7 +118,16 @@ function readDir(kind: ContentKind, dirName: string): Doc[] {
     .map((file) => {
       const sourcePath = path.join(dir, file);
       const raw = fs.readFileSync(sourcePath, "utf8");
-      const { data, content } = matter(raw);
+      const parsed = matter(raw);
+      const data = parsed.data;
+
+      // Normalise line endings once, here, so nothing downstream has to think
+      // about them. A Windows checkout gives these files CRLF, and a stray \r
+      // left on the end of a line silently breaks the TODO scan — `.` does not
+      // match \r in JavaScript, so `(.*)$` fails and the punch list reads as
+      // empty. It fails quietly and only on some machines, which is the worst
+      // kind of failure to go looking for.
+      const content = parsed.content.replace(/\r\n/g, "\n");
 
       const slug = asString(data.slug) || file.replace(/\.md$/, "");
 
@@ -138,6 +159,25 @@ function readDir(kind: ContentKind, dirName: string): Doc[] {
         sourcePath: path.relative(process.cwd(), sourcePath),
       } satisfies Doc;
     });
+}
+
+/**
+ * A frontmatter URL only counts as a link when it is a real http(s) address.
+ * `liveUrl: TODO` is a placeholder standing in for one nobody has confirmed
+ * yet — rendering it as a link would send someone to a broken page, which is
+ * worse than showing no link at all.
+ */
+export function asLink(value?: string): string | undefined {
+  return value && /^https?:\/\//i.test(value.trim()) ? value.trim() : undefined;
+}
+
+/** The bare host, e.g. "crossservicesgroup.com" — what to show on a button. */
+export function linkHost(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
 }
 
 /* -------------------------------------------------------------------------
@@ -196,15 +236,20 @@ export function getAllDocs(): Doc[] {
  * Parsed line by line rather than with one big regex, because a blockquote
  * can run to any number of lines and the detail needs to survive intact.
  */
-export function extractTodos(body: string): { title: string; detail: string }[] {
-  const lines = body.split("\n");
-  const found: { title: string; detail: string }[] = [];
+export function extractTodos(
+  body: string,
+): { kind: ItemKind; title: string; detail: string }[] {
+  // Tolerate a stray \r even though readDir already strips them, so this stays
+  // correct if it is ever called with a raw string from somewhere else.
+  const lines = body.replace(/\r\n/g, "\n").split("\n");
+  const found: { kind: ItemKind; title: string; detail: string }[] = [];
 
   for (let i = 0; i < lines.length; i++) {
-    const opener = lines[i].match(/^\s*>\s*\[!TODO\]\s*(.*)$/i);
+    const opener = lines[i].match(/^\s*>\s*\[!(TODO|WARNING)\]\s*(.*)$/i);
     if (!opener) continue;
 
-    const title = opener[1].trim() || "Untitled";
+    const kind = opener[1].toLowerCase() === "warning" ? "warning" : "todo";
+    const title = opener[2].trim() || "Untitled";
     const detail: string[] = [];
 
     // Consume the rest of the blockquote.
@@ -217,18 +262,37 @@ export function extractTodos(body: string): { title: string; detail: string }[] 
       detail.push(quoted[1]);
     }
 
-    found.push({ title, detail: detail.join("\n").trim() });
+    found.push({ kind, title, detail: detail.join("\n").trim() });
     i = j - 1;
   }
 
   return found;
 }
 
-/** Every TODO across every content file, for the /todos punch list. */
+/**
+ * A stable identifier for one item, used as the localStorage key for its
+ * checkbox. Built from the source file and the item's title so that adding,
+ * removing or reordering items elsewhere in the file cannot shift it onto a
+ * different item — which would silently move someone's tick to the wrong task.
+ *
+ * Editing an item's title does reset its tick. That is the safer failure:
+ * a reworded item deserves rereading.
+ */
+function itemId(sourcePath: string, title: string): string {
+  const slug = (s: string) =>
+    s
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+  return `${slug(sourcePath.replace(/\\/g, "/"))}--${slug(title)}`;
+}
+
+/** Every TODO and warning across every content file, for the punch list. */
 export function getAllTodos(): TodoItem[] {
   return getAllDocs().flatMap((doc) =>
     extractTodos(doc.bodyRaw).map((t) => ({
       ...t,
+      id: itemId(doc.sourcePath, t.title),
       docTitle: doc.title,
       href: doc.href,
       section: doc.section,
@@ -284,11 +348,23 @@ export function getSearchIndex() {
     title: todo.title,
     href: "/todos",
     section: "To do",
-    summary: `Open item on ${todo.docTitle}`,
+    summary: `${todo.kind === "warning" ? "Warning" : "Open item"} on ${todo.docTitle}`,
     text: toPlainText(todo.detail),
   }));
 
-  return [...docs, ...accounts, ...spend, ...todos];
+  // The assistant is a screen rather than a document, so nothing above picks
+  // it up. Without this entry, someone searching "ask" or "chatbot" — a
+  // reasonable way to go looking for it — finds nothing.
+  const ask = {
+    title: "Ask — the assistant",
+    href: "/ask",
+    section: "Pages",
+    summary:
+      "Ask a question in plain English about any system, account, cost or runbook here.",
+    text: "assistant chatbot chat ask question help AI Claude search answers",
+  };
+
+  return [...docs, ask, ...accounts, ...spend, ...todos];
 }
 
 /**

@@ -35,32 +35,18 @@ A separate CSG Office folder holds four more boards, in the same format: Everyon
 
 ## What it costs — and why this matters now
 
-> [!WARNING] The trial ends and this structure collapses
-> The current structure is about sixteen boards. Monday's free plan only allows 2 seats and 3 boards, with no automations or integrations — so everything built so far is running on a trial. When the trial ends, this structure will collapse unless a paid plan is in place.
->
-> Roughly, the paid tiers are:
->
-> | Plan | Roughly | What it adds |
-> | --- | --- | --- |
-> | Basic | $9/seat/month | No automations or integrations |
-> | Standard | $12/seat/month | Adds automations, integrations, and guest access |
-> | Pro | $19/seat/month | Further tier above Standard |
->
-> All of these are billed annually with a three-seat minimum. **Standard is the realistic floor for a company rollout** — Basic can't run automations at all. Guest access on Standard is the inexpensive way to give field crews visibility into their boards without buying each of them a full seat.
->
-> These figures are approximate. Verify current pricing at `monday.com/pricing` before committing to a plan.
+**Monday.com is now on a paid plan at $63 a month.** That settles the question this page used to open with — the trial is no longer counting down, and the sixteen-board structure is not about to collapse back onto a free plan that allows three boards.
+
+What is not settled is what that $63 buys. Monday prices per seat, so the figure is a plan tier multiplied by a seat count, and neither is written down anywhere. That matters for one reason: rolling the workspace out to more of the company means buying more seats, and without knowing the per-seat rate nobody can say what a wider rollout costs. Guest access is the lever worth knowing about here — on the tiers that support it, it is the inexpensive way to give field crews visibility into their own boards without buying each of them a full seat.
 
 > [!TODO] Assign an owner for Monday.com
-> Someone needs to be responsible for this workspace going forward — for the plan decision below, for keeping the structure clean, and for the eventual rollout.
+> Someone needs to be responsible for this workspace going forward — for the rollout, for keeping the structure clean, and for a bill that is now being paid every month.
 
-> [!TODO] Confirm the trial end date
-> Find out when the current free trial actually ends, so the plan decision doesn't get made at the last minute.
+> [!TODO] Record what the $63 covers
+> Confirm which plan tier and how many seats the $63/month figure represents, and whether it is billed monthly or annually. Until that is written down, nobody can work out what adding a person costs.
 
-> [!TODO] Decide the seat count
-> Decide how many seats are actually needed at rollout (versus how many people should instead get guest access).
-
-> [!TODO] Decide which plan to commit to
-> Decide between Basic, Standard, and Pro before the trial ends. Standard is described above as the realistic floor for a real rollout, since it's the cheapest tier with automations and integrations — but confirm this against actual needs and current pricing.
+> [!TODO] Decide the seat count for rollout
+> Decide how many full seats are actually needed when the workspace goes into real use, versus how many people should instead get guest access. This is the decision that moves the $63.
 
 <!-- TECHNICAL -->
 

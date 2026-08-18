@@ -53,7 +53,7 @@ The scheduler expects its input (job list, addresses, whatever gets exported int
 2. Run it through the scheduler.
 3. Compare the output to what you know is correct.
    - **Good:** distances and order match expectations.
-   - **If it still looks wrong after Steps 1-3:** the problem may be in the scheduler's own logic rather than its dependencies. This needs a developer to look at the code in `https://github.com/gkmestler/CrossServicesScheduleAgent1.git`.
+   - **If it still looks wrong after Steps 1-3:** the problem may be in the scheduler's own logic rather than its dependencies. This needs a developer to look at the code in `https://github.com/crossservicesgroup-ai/CrossServicesScheduleAgent1`.
 
 ## Still stuck?
 

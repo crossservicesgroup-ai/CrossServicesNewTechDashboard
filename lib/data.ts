@@ -18,6 +18,15 @@ export type Account = {
   accountOwner: string;
   loginAs: string;
   vaultEntry: string;
+  /**
+   * Deep link to the Bitwarden item named by vaultEntry. Optional — a row
+   * without one renders vaultEntry as plain text, so rows nobody has linked
+   * yet degrade quietly instead of looking broken.
+   *
+   * This is an address, not a credential. The item id is useless without
+   * access to the vault, so it is safe to commit. Nothing secret belongs here.
+   */
+  vaultUrl?: string;
   twoFactor: string;
   usedBy: string[];
   ifThisLapses: string;

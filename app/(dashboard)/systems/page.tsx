@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getSystems } from "@/lib/content";
+import { getSystems, asLink, linkHost } from "@/lib/content";
 import { Page } from "@/components/Shell";
 import { ServiceTag } from "@/components/ServiceTag";
 import { SYSTEM_STATUS } from "@/lib/status";
@@ -29,33 +29,68 @@ export default function SystemsIndexPage() {
       </header>
 
       <ul className="grid gap-5 sm:grid-cols-2">
-        {systems.map((system) => (
-          <li key={system.slug}>
-            <Link
-              href={system.href}
-              className="group block h-full border border-line bg-surface hover:border-cross-blue"
-              style={{ borderRadius: "var(--radius-card)" }}
-            >
-              <ServiceTag
-                id={system.slug}
-                status={system.status}
-                lastReviewed={system.lastReviewed}
-                className="border-0"
-              />
-              <div className="px-4 py-4">
-                <h2 className="text-xl group-hover:text-cross-blue">
-                  {system.title}
-                </h2>
-                {system.summary ? (
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted">
-                    {system.summary}
-                  </p>
-                ) : null}
-                <p className="type-eyebrow mt-4 text-cross-blue">Read more →</p>
+        {systems.map((system) => {
+          // Only a real address becomes a button. A system whose liveUrl is
+          // still TODO gets no button at all rather than a dead one.
+          const appUrl = asLink(system.liveUrl);
+
+          return (
+            <li key={system.slug} className="flex">
+              {/* The card is a plain container, not a link. The whole surface
+                  is still clickable — the title's link stretches over it via
+                  the ::after overlay below — because an <a> for the live app
+                  cannot legally sit inside another <a>. */}
+              <div
+                className="group relative flex h-full w-full flex-col border border-line bg-surface hover:border-cross-blue focus-within:border-cross-blue"
+                style={{ borderRadius: "var(--radius-card)" }}
+              >
+                <ServiceTag
+                  id={system.slug}
+                  status={system.status}
+                  lastReviewed={system.lastReviewed}
+                  className="border-0"
+                />
+                <div className="flex flex-1 flex-col px-4 py-4">
+                  <h2 className="text-xl group-hover:text-cross-blue">
+                    <Link
+                      href={system.href}
+                      className="after:absolute after:inset-0 after:content-['']"
+                    >
+                      {system.title}
+                    </Link>
+                  </h2>
+                  {system.summary ? (
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted">
+                      {system.summary}
+                    </p>
+                  ) : null}
+
+                  {/* mt-auto pins the row to the bottom, so the buttons line
+                      up across cards whose summaries differ in length. */}
+                  <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-4">
+                    <span className="type-eyebrow text-cross-blue">
+                      Read more →
+                    </span>
+                    {appUrl ? (
+                      // z-10 lifts it above the title's stretched overlay, so
+                      // this link wins the click instead of the card behind it.
+                      <a
+                        href={appUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={appUrl}
+                        className="type-eyebrow relative z-10 border border-line px-2 py-1 text-ink hover:border-cross-blue hover:text-cross-blue"
+                        style={{ borderRadius: "var(--radius-control)" }}
+                      >
+                        Open {linkHost(appUrl)} ↗
+                      </a>
+                    ) : null}
+                  </div>
+                </div>
               </div>
-            </Link>
-          </li>
-        ))}
+            </li>
+          );
+        })}
       </ul>
 
       <section className="mt-12">

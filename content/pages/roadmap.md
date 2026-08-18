@@ -3,20 +3,23 @@ title: Roadmap
 slug: roadmap
 status: in-progress
 owner: TODO
-lastReviewed: 2026-08-07
-summary: What was planned but not yet built, and the open decisions still waiting on the Monday.com setup.
+lastReviewed: 2026-08-17
+summary: What is underway, what was planned but not started, and the open decisions still waiting on the Monday.com setup.
 ---
 
 This page covers what was scoped but not built, plus the open decisions carried forward from other pages. Very little is confirmed here. Where the brief does not say something, this page says so rather than guessing.
 
-## Not built
+## In progress
 
 ### AI receptionist
 
-Status: `not-built`. Not started.
+Work started before 17 Aug 2026, so this now has its own page: [AI Receptionist](/systems/ai-receptionist). Its scope was never written down before building began, and it still has not been — the open items are on that page.
 
-> [!TODO] AI receptionist scope
-> No scope has been recorded for this item — what it would answer, what phone or chat system it would connect to, or what "done" looks like. Confirm with whoever requested it before any work starts.
+## Not built
+
+### QuickBooks automation
+
+Status: `not-built`. Raised, nothing started, no scope agreed. See [QuickBooks Automation](/systems/quickbooks-automation) for the decisions that need making before work begins.
 
 ### Website chatbot
 

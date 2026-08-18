@@ -10,13 +10,13 @@
     "spendCap": null
   },
   {
-    "service": "Anthropic API",
+    "service": "Anthropic API (Claude Platform)",
     "monthlyCost": null,
     "billing": "usage",
     "costType": "variable",
-    "attributedTo": ["furies-scheduler"],
-    "renewalDate": "TODO",
-    "note": "Usage-based. No spend cap or billing alert confirmed — this is the kind of billing that produces a surprise invoice.",
+    "attributedTo": ["furies-scheduler", "csg-website"],
+    "renewalDate": "n/a",
+    "note": "Estimated at about $5 a month at current usage, and about $30 a month at the top of the expected range. Separate from the $20/month Claude account — this is the developer API, billed per request, and it powers the agent in the Furies Scheduler, the Ask screen in this dashboard, and (once built) the assistant on the Cross Services website. Expected volume is roughly 1–10 requests a week per system. The estimate is deliberately not counted in the confirmed total above, because nobody has read an actual invoice yet. No spend cap or billing alert is set, which is what turns a runaway loop or a leaked key into a surprise bill.",
     "spendCap": null
   },
   {
@@ -31,12 +31,12 @@
   },
   {
     "service": "Supabase",
-    "monthlyCost": null,
-    "billing": "TODO",
+    "monthlyCost": 25,
+    "billing": "monthly",
     "costType": "fixed",
-    "attributedTo": ["furies-scheduler"],
+    "attributedTo": ["furies-scheduler", "bd-dashboard"],
     "renewalDate": "TODO",
-    "note": "Database. Plan tier unconfirmed.",
+    "note": "$25/month for one seat, covering every project the company runs on Supabase — currently the Furies Scheduler and the BD Dashboard. One seat and one bill, not one per project, so adding another project does not add another $25. Note that a Supabase seat covers people, not usage: database size, bandwidth and egress are metered on top of the seat once a project outgrows the included allowance, so this is a floor rather than a hard ceiling.",
     "spendCap": null
   },
   {
@@ -51,12 +51,12 @@
   },
   {
     "service": "Monday.com",
-    "monthlyCost": null,
-    "billing": "annual",
+    "monthlyCost": 63,
+    "billing": "monthly",
     "costType": "fixed",
     "attributedTo": ["monday"],
     "renewalDate": "TODO",
-    "note": "Currently on a trial. See the Monday page for the plan decision.",
+    "note": "$63/month for the workspace that tracks work across the divisions. Which plan tier and how many seats that figure covers is not recorded — worth writing down, because seat count is what makes this number move when the workspace is rolled out more widely. See the Monday page.",
     "spendCap": null
   },
   {
@@ -70,13 +70,13 @@
     "spendCap": null
   },
   {
-    "service": "Claude Team",
-    "monthlyCost": null,
-    "billing": "annual",
+    "service": "Claude",
+    "monthlyCost": 20,
+    "billing": "monthly",
     "costType": "fixed",
     "attributedTo": [],
     "renewalDate": "TODO",
-    "note": "Not purchased yet. Standard seats are $20/seat/month billed annually; Premium (required for Claude Code) is $100/seat/month annually. Seat count is undecided, so the monthly cost cannot be calculated.",
+    "note": "$20/month for one Claude account, shared by the whole team rather than a seat per person. This is the chat product at claude.ai — it is not the Anthropic API, which is billed separately per request and listed above. See the Claude page for what a single shared account means in practice.",
     "spendCap": null
   },
   {
@@ -87,6 +87,36 @@
     "attributedTo": ["csg-website", "furies-scheduler"],
     "renewalDate": "TODO",
     "note": "May be free tier. Unconfirmed.",
+    "spendCap": null
+  },
+  {
+    "service": "Google Analytics (GA4)",
+    "monthlyCost": 0,
+    "billing": "free",
+    "costType": "fixed",
+    "attributedTo": ["csg-website"],
+    "renewalDate": "n/a",
+    "note": "GA4 standard is free and stays free at anything like this site's traffic. The paid tier (Analytics 360) is enterprise pricing and is not in use. This is one of the few genuinely confirmed zeroes on this page.",
+    "spendCap": null
+  },
+  {
+    "service": "Google Search Console",
+    "monthlyCost": 0,
+    "billing": "free",
+    "costType": "fixed",
+    "attributedTo": ["csg-website"],
+    "renewalDate": "n/a",
+    "note": "Free with no paid tier. Nothing to renew and nothing to cancel.",
+    "spendCap": null
+  },
+  {
+    "service": "Domain registration",
+    "monthlyCost": null,
+    "billing": "annual",
+    "costType": "fixed",
+    "attributedTo": ["csg-website"],
+    "renewalDate": "TODO",
+    "note": "Annual renewal for crossservicesgroup.com. Small money, but as of 13 Aug 2026 the live website depends on it — if this renewal is missed the public site goes offline. Registrar, cost, renewal date and auto-renew setting are all unconfirmed because nobody has the registrar login yet.",
     "spendCap": null
   },
   {

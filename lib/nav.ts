@@ -1,7 +1,8 @@
 /**
- * The nav. Nine sections plus the punch list and the print view.
+ * The nav. Ten sections plus the punch list and the print view.
  *
  * Adding a page means adding a line here and a markdown file in /content.
+ * (Ask is the exception — it is a screen, not a document, so it has no file.)
  */
 
 export type NavItem = {
@@ -13,11 +14,12 @@ export type NavItem = {
 
 export const NAV: NavItem[] = [
   { href: "/", label: "Start Here", hint: "What all this is, and what breaks first" },
-  { href: "/systems", label: "Systems", hint: "The four things that were built" },
+  { href: "/ask", label: "Ask", hint: "Ask a question about any of it, in plain English" },
+  { href: "/systems", label: "Systems", hint: "Everything that was built, and what state it is in" },
   { href: "/accounts", label: "Accounts", hint: "Who owns what, and what is at risk" },
   { href: "/spend", label: "Spend", hint: "What it costs to run" },
   { href: "/how-this-was-built", label: "How This Was Built", hint: "The Claude Code workflow" },
-  { href: "/claude-for-teams", label: "Claude for Teams", hint: "Seats and pricing" },
+  { href: "/claude", label: "Claude", hint: "The shared account, and what the API costs" },
   { href: "/runbooks", label: "Runbooks", hint: "What to do when something breaks" },
   { href: "/roadmap", label: "Roadmap", hint: "Unfinished and unstarted work" },
   { href: "/resources", label: "Resources", hint: "Presentation and learning material" },

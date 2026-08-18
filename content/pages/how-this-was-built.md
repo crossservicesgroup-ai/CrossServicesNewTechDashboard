@@ -13,14 +13,19 @@ This is why the systems can be changed quickly and cheaply going forward. Whoeve
 
 This page is adapted from a guide Gavin wrote for CSG, "Building Apps with Claude Code," and reorganized here as a working reference for whoever takes this over. The original document also covers the tools, the accounts, and the vocabulary in more depth than a quick skim needs.
 
-> [!WARNING] Read before touching either repo
 > [!WARNING] Pushing to `main` publishes to the live site immediately
-> Pushing to `main` on either CSG repository deploys to production immediately. There is no review step, no approval, and no staging environment in between. Always test at `localhost:3000` first and confirm it looks right before you push.
+> Read this before touching either repo. Pushing to `main` on either CSG repository deploys to production immediately. There is no review step, no approval, and no staging environment in between. Always test at `localhost:3000` first and confirm it looks right before you push.
 
-The two repositories are:
+As of 13 Aug 2026 every CSG repository lives in the GitHub organisation `crossservicesgroup-ai`, which signs in as `crossservicesgroup@gmail.com`. Before that date they were spread across a personal account.
 
-- `https://github.com/gkmestler/CrossServicesSite.git` — the CSG website
-- `https://github.com/gkmestler/CrossServicesScheduleAgent1.git` — the Furies scheduler
+| Repository | What it is | Verified |
+|---|---|---|
+| `CrossServicesSite` | The CSG website | Yes |
+| `CrossServicesScheduleAgent1` | The Furies scheduler | Yes |
+| `CrossServicesNewTechDashboard` | This handover dashboard | Yes |
+| `Cross-Services-Group-Dashboard` | The [BD Dashboard](/systems/bd-dashboard) | **No** — see that page |
+
+"Verified" means the repository was confirmed to resolve under the organisation on 13 Aug 2026, not merely reported as moved. The warning below about pushing to `main` applies to the website and the scheduler, which both deploy automatically.
 
 <!-- TECHNICAL -->
 

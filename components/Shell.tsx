@@ -1,12 +1,18 @@
 import { getSearchIndex, getTodoCount } from "@/lib/content";
 import { SearchProvider } from "./Search";
 import { MobileBar, Sidebar } from "./Nav";
+import { AssistantProvider } from "./Assistant";
+import { AssistantPanel } from "./AssistantPanel";
 
 /**
  * The page shell: sidebar on desktop, top bar and drawer on mobile.
  *
  * Reads the search index and the TODO count at build time and hands them to
  * the client components, so neither has to fetch anything.
+ *
+ * The assistant's state lives here, above both the pages and the corner
+ * panel. That is what lets /ask and the panel be the same conversation, and
+ * what stops moving between pages throwing it away.
  */
 export function Shell({ children }: { children: React.ReactNode }) {
   const index = getSearchIndex();
@@ -14,16 +20,20 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
   return (
     <SearchProvider index={index}>
-      <a href="#main" className="skip-link">
-        Skip to content
-      </a>
+      <AssistantProvider>
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
 
-      <MobileBar todoCount={todoCount} />
+        <MobileBar todoCount={todoCount} />
 
-      <div className="flex min-h-screen">
-        <Sidebar todoCount={todoCount} />
-        <div className="min-w-0 flex-1">{children}</div>
-      </div>
+        <div className="flex min-h-screen">
+          <Sidebar todoCount={todoCount} />
+          <div className="min-w-0 flex-1">{children}</div>
+        </div>
+
+        <AssistantPanel />
+      </AssistantProvider>
     </SearchProvider>
   );
 }

@@ -9,7 +9,7 @@ summary: Steps to remove a departing person's access across every CSG system, in
 
 **Symptom:** Someone with access to CSG's websites, automations, or accounts has left, and you need to shut off their access.
 
-**Read this first — the order matters.** It is tempting to start by cutting off someone's email, since that feels like the "master switch." Do the opposite. Their Google Workspace / email login is often how they'd sign in to the other tools (GitHub, Vercel, Claude Team, and so on), and it is also where password-reset links land. If you kill email access first, you may lock yourself out of the very accounts you still need to clean up. Work through everything else first, and revoke identity/email last.
+**Read this first — the order matters.** It is tempting to start by cutting off someone's email, since that feels like the "master switch." Do the opposite. Their Google Workspace / email login is often how they'd sign in to the other tools (GitHub, Vercel, and so on), and it is also where password-reset links land. If you kill email access first, you may lock yourself out of the very accounts you still need to clean up. Work through everything else first, and revoke identity/email last.
 
 ## Order of operations
 
@@ -22,7 +22,7 @@ Work top to bottom. Do not skip ahead to email/Workspace until everything above 
 | 3 | Vercel | Remove them from the Vercel team/project if they have separate access. Note: these projects are on a personal account — confirm who actually holds the account before assuming a "remove teammate" step is even needed | ☐ |
 | 4 | Supabase | Remove them as a project member/collaborator | ☐ |
 | 5 | Anthropic (API console) | Remove their access to the Anthropic console/API account, if they had any | ☐ |
-| 6 | Claude Team | Remove their seat from the Claude Team workspace | ☐ |
+| 6 | Claude (claude.ai) | There are no seats to remove — the whole team shares one account. Change the account password and re-share it with the people who should still have it. See step 8 | ☐ |
 | 7 | Bitwarden | Remove them from the `CSG Systems` vault/organization | ☐ |
 | 8 | Rotate shared credentials | See "What to rotate" below | ☐ |
 | 9 | Google Workspace / email | Suspend or delete their account last | ☐ |
@@ -37,6 +37,7 @@ Removing a person's login is not the same as rotating a shared secret they had a
    - `RESEND_API_KEY` and `QUOTE_FROM_EMAIL` (CSG website email sending)
    - `APP_PASSWORD`, `SESSION_SECRET`, `ANTHROPIC_API_KEY`, `GOOGLE_MAPS_API_KEY`, `NEXT_PUBLIC_GOOGLE_MAPS_BROWSER_KEY`, `DATABASE_URL` (Scheduler)
    - The Google Maps API key specifically — it lives on a personal admin console, so confirm who controls that console before assuming it is covered by a Workspace offboarding
+   - The shared Claude account password. There is one account for the whole team, so there is no seat to remove — changing the password is the only way to cut one person off, and it cuts everyone off until they are given the new one
    > [!TODO] Google Maps console owner
    > Confirm which account controls the Google Maps API key's admin console, and whether the departing person has (or had) access to it.
 4. Update the rotated values in Vercel's environment variables for both projects, and in the Bitwarden vault entry, so the running sites keep working with the new credentials. Do not paste the new secret anywhere other than Vercel's environment variable fields and the Bitwarden entry.

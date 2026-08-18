@@ -112,7 +112,12 @@ containing:
 ```
 SITE_PASSWORD=pick-any-password-for-local-use
 SESSION_SECRET=any-long-random-string
+ANTHROPIC_API_KEY=sk-ant-your-key-here
 ```
+
+The first two are required. `ANTHROPIC_API_KEY` powers the assistant in the
+bottom-right corner — leave it out and the rest of the site works normally,
+but the assistant answers every question by saying it is not configured.
 
 `.env.local` is deliberately excluded from GitHub and must stay that way.
 
@@ -150,9 +155,15 @@ Preview and Development environments.
 | --- | --- |
 | `SITE_PASSWORD` | The shared password people type to read this dashboard. Choose a strong one, store it in Bitwarden, and share it with the office. |
 | `SESSION_SECRET` | A long random string used to sign the login cookie. Generate with `openssl rand -hex 32`. It is not a password anyone types — nobody needs to remember it. Store it in Bitwarden anyway. |
+| `ANTHROPIC_API_KEY` | The key the assistant uses to reach Claude. Create one at <https://console.anthropic.com/settings/keys> and store it in Bitwarden. Optional — everything except the assistant works without it. |
 
-Both are required. If either is missing, nobody can sign in — the site fails
-closed on purpose, rather than letting everybody in.
+The first two are required. If either is missing, nobody can sign in — the
+site fails closed on purpose, rather than letting everybody in.
+
+`ANTHROPIC_API_KEY` is billed per use, on the Anthropic account it belongs to.
+Set a monthly spend limit on that account rather than trusting the site to
+stay quiet; the assistant is behind the site password, but a shared password
+is only ever as private as the people holding it.
 
 Changing `SESSION_SECRET` signs everyone out. That is the fastest way to revoke
 access if the password leaks: change both values and redeploy.

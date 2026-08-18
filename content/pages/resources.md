@@ -11,7 +11,7 @@ This page is meant to collect AI presentation material and learning material for
 
 ## Claude Code and how this was built
 
-The full write-up of how this dashboard and the other tools were built lives at `/how-this-was-built`. See also `/claude-for-teams` for the Claude for Teams material.
+The full write-up of how this dashboard and the other tools were built lives at `/how-this-was-built`. See also `/claude` for the shared Claude account and what the API costs.
 
 > [!TODO] Building Apps with Claude Code guide
 > There is a "Building Apps with Claude Code" guide referenced as source material for `/how-this-was-built`. Confirm where the guide itself is stored (folder, doc link) so it can be linked from here if needed, separate from the write-up page.
