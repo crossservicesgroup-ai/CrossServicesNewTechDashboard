@@ -51,7 +51,6 @@ Each of the three needs someone to actually do something. They are tracked separ
 | BD Dashboard | live | Michael's business development tracker — weekly outreach, leads and opportunities, in a real database. | see `/systems/bd-dashboard` |
 | Monday.com | in-progress | Work tracking across the divisions. Set up but not yet in real use. | see `/systems/monday` |
 | AI Receptionist | in-progress | Being built. Nothing about it is documented yet. | see `/systems/ai-receptionist` |
-| QuickBooks Automation | not-built | Raised, not started, no scope agreed. | see `/systems/quickbooks-automation` |
 
 ## What state it's in
 
@@ -59,7 +58,7 @@ Four systems are live and running: the CSG website, the Furies scheduler, the li
 
 Two of those four are live with a caveat worth knowing. The linen automation writes new orders into the spreadsheet by itself, but its confirmation emails are still in draft mode — no customer has received an automatic email, and switching that on is a staged job, not a toggle. The BD dashboard is in use by Michael, but whether it is deployed anywhere or only runs on his machine is still not confirmed.
 
-Monday.com is set up but not yet in real use. The AI receptionist is being built and nothing about it has been written down, which is the biggest documentation gap on this dashboard right now. The QuickBooks automation has been raised and not started.
+Monday.com is set up but not yet in real use. The AI receptionist is being built and nothing about it has been written down, which is the biggest documentation gap on this dashboard right now.
 
 **Changed on 13 Aug 2026.** Two things moved on the website, both good, and both with a tail:
 

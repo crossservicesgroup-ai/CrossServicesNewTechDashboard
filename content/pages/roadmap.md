@@ -17,10 +17,6 @@ Work started before 17 Aug 2026, so this now has its own page: [AI Receptionist]
 
 ## Not built
 
-### QuickBooks automation
-
-Status: `not-built`. Raised, nothing started, no scope agreed. See [QuickBooks Automation](/systems/quickbooks-automation) for the decisions that need making before work begins.
-
 ### Website chatbot
 
 Status: `not-built`. Not started.
