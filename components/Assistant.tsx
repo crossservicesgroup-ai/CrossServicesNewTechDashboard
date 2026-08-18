@@ -264,46 +264,11 @@ export function AssistantProvider({ children }: { children: React.ReactNode }) {
 /* -------------------------------------------------------------------------
    Suggested questions
 
-   Shared so the corner panel and the full screen offer the same starting
-   points. The full screen shows the groups; the panel shows a short list.
+   Only the corner panel offers these. The full screen at /ask is a plain
+   chat box with nothing in it but the conversation.
    ------------------------------------------------------------------------- */
 
-export const SUGGESTION_GROUPS: { heading: string; questions: string[] }[] = [
-  {
-    heading: "If you are new to this",
-    questions: [
-      "What is all of this, and what breaks first if nobody acts?",
-      "What should I do in my first week?",
-      "Which systems are live right now, and which are not?",
-    ],
-  },
-  {
-    heading: "Accounts and access",
-    questions: [
-      "Which accounts are not owned by CSG?",
-      "Where is the Vercel login kept?",
-      "What happens if the domain renewal is missed?",
-    ],
-  },
-  {
-    heading: "What it costs",
-    questions: [
-      "What does all of this cost per month?",
-      "Which costs could produce a surprise bill?",
-      "What is not yet confirmed on the spend page?",
-    ],
-  },
-  {
-    heading: "When something breaks",
-    questions: [
-      "The website is down — what do I do?",
-      "The linen automation has stopped writing orders.",
-      "The scheduler is producing bad routes.",
-    ],
-  },
-];
-
-/** The handful shown in the corner panel, where there is no room for groups. */
+/** The handful shown in the corner panel. */
 export const PANEL_SUGGESTIONS = [
   "What breaks first if I do nothing?",
   "Which accounts are not owned by CSG?",
